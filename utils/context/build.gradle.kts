@@ -1,20 +1,30 @@
 plugins {
   id("com.android.library")
   id("org.jetbrains.kotlin.android")
+  id("publish-maven-central")
+}
+publish.artifactId = "utils-context"
+android {
+  publishing {
+    singleVariant("release") {
+      withJavadocJar()
+      withSourcesJar()
+    }
+  }
 }
 
 android {
-  namespace = "com.g985892345.context"
+  namespace = "com.g985892345.utils.context"
   compileSdk = 33
-  
+
   defaultConfig {
     minSdk = 24
     targetSdk = 33
-    
+
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
   }
-  
+
   buildTypes {
     release {
       isMinifyEnabled = false
@@ -31,9 +41,9 @@ android {
 }
 
 dependencies {
-  
+
   api("androidx.startup:startup-runtime:1.1.1")
-  
+
   implementation("androidx.core:core-ktx:1.8.0")
   implementation("androidx.appcompat:appcompat:1.6.1")
   implementation("com.google.android.material:material:1.9.0")

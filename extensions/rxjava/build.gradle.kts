@@ -1,20 +1,30 @@
 plugins {
   id("com.android.library")
   id("org.jetbrains.kotlin.android")
+  id("publish-maven-central")
+}
+publish.artifactId = "extensions-rxjava"
+android {
+  publishing {
+    singleVariant("release") {
+      withJavadocJar()
+      withSourcesJar()
+    }
+  }
 }
 
 android {
   namespace = "com.g985892345.extensions.rxjava"
   compileSdk = 33
-  
+
   defaultConfig {
     minSdk = 24
     targetSdk = 33
-    
+
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
   }
-  
+
   buildTypes {
     release {
       isMinifyEnabled = false
@@ -31,11 +41,11 @@ android {
 }
 
 dependencies {
-  
+
   api(project(":extensions:android"))
   api("io.reactivex.rxjava3:rxjava:3.1.6")
   api("io.reactivex.rxjava3:rxandroid:3.0.2")
-  
+
   implementation("androidx.core:core-ktx:1.8.0")
   implementation("androidx.appcompat:appcompat:1.6.1")
   implementation("com.google.android.material:material:1.9.0")

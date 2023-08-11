@@ -1,4 +1,4 @@
-package com.g985892345.android
+package com.g985892345.extensions.android
 
 import android.content.Context
 import android.content.pm.ApplicationInfo

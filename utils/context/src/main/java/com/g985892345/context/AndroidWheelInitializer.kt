@@ -17,6 +17,6 @@ class AndroidWheelInitializer : Initializer<Unit> {
   override fun create(context: Context) {
     UtilsContext.setApplication(context.applicationContext as Application)
   }
-  
+
   override fun dependencies() = emptyList<Class<out Initializer<*>>>()
 }

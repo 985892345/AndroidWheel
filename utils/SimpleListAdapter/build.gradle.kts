@@ -3,7 +3,7 @@ plugins {
   id("org.jetbrains.kotlin.android")
   id("publish-maven-central")
 }
-publish.artifactId = "extensions-rxpermissions"
+publish.artifactId = "utils-SimpleListAdapter"
 android {
   publishing {
     singleVariant("release") {
@@ -14,12 +14,11 @@ android {
 }
 
 android {
-  namespace = "com.g985892345.extensions.rxpermissions"
+  namespace = "com.g985892345.utils.simplelistadapter"
   compileSdk = 33
 
   defaultConfig {
     minSdk = 24
-    targetSdk = 33
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles("consumer-rules.pro")
@@ -28,7 +27,10 @@ android {
   buildTypes {
     release {
       isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro"
+      )
     }
   }
   compileOptions {
@@ -42,11 +44,7 @@ android {
 
 dependencies {
 
-  api(project(":extensions:android"))
-  api("io.reactivex.rxjava3:rxjava:3.1.6")
-  api("com.github.tbruyelle:rxpermissions:0.12")
-
-  implementation("androidx.core:core-ktx:1.8.0")
+  implementation("androidx.core:core-ktx:1.9.0")
   implementation("androidx.appcompat:appcompat:1.6.1")
   implementation("com.google.android.material:material:1.9.0")
   testImplementation("junit:junit:4.13.2")

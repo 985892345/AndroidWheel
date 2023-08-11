@@ -12,12 +12,14 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/extensions" />
             <option value="$PROJECT_DIR$/extensions/android" />
             <option value="$PROJECT_DIR$/extensions/gson" />
             <option value="$PROJECT_DIR$/extensions/rxjava" />
             <option value="$PROJECT_DIR$/extensions/rxpermissions" />
             <option value="$PROJECT_DIR$/utils" />
+            <option value="$PROJECT_DIR$/utils/SimpleListAdapter" />
             <option value="$PROJECT_DIR$/utils/context" />
           </set>
         </option>

@@ -1,4 +1,4 @@
-package com.g985892345.android
+package com.g985892345.extensions.android
 
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -48,7 +48,7 @@ open class ExceptionResult<Emitter>(
   val throwable: Throwable,
   val emitter: Emitter
 ) {
-  
+
   /**
    * 处理 [T] 类型的异常
    * ```
@@ -66,7 +66,7 @@ open class ExceptionResult<Emitter>(
     }
     return this
   }
-  
+
   /**
    * 抓取除了 [T] 以外的其他异常
    */

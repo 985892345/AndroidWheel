@@ -1,4 +1,4 @@
-package com.g985892345.android
+package com.g985892345.extensions.android
 
 import kotlinx.coroutines.flow.*
 
@@ -38,7 +38,6 @@ import kotlinx.coroutines.flow.*
  */
 
 
-
 /**
  * 使用优雅的 DSL 来拦截异常
  *
@@ -76,7 +75,7 @@ import kotlinx.coroutines.flow.*
  */
 fun <T> Flow<T>.interceptException(
   action: suspend ExceptionResult<FlowCollector<T>>.(Throwable) -> Unit
-) : Flow<T> {
+): Flow<T> {
   return catch {
     ExceptionResult(it, this).action(it)
   }
@@ -100,4 +99,4 @@ fun <T> Flow<T>.interceptException(
  */
 fun <T> Flow<T>.interceptExceptionByResult(
   action: suspend ExceptionResult<FlowCollector<Result<T>>>.(Throwable) -> Unit
-) : Flow<Result<T>> = map { Result.success(it) }.interceptException(action)
+): Flow<Result<T>> = map { Result.success(it) }.interceptException(action)

@@ -1,4 +1,4 @@
-package com.g985892345.android
+package com.g985892345.extensions.android
 
 import android.text.TextPaint
 import android.text.style.CharacterStyle
@@ -34,11 +34,11 @@ fun ClickableSpan.wrapByNoLeak(view: View): ClickableSpan {
     override fun onClick(widget: View) {
       weakReference.get()?.onClick(widget)
     }
-    
+
     override fun updateDrawState(ds: TextPaint) {
       weakReference.get()?.updateDrawState(ds)
     }
-    
+
     override fun getUnderlying(): CharacterStyle {
       return weakReference.get()?.underlying ?: super.getUnderlying()
     }

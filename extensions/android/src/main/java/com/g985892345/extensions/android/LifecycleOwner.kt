@@ -1,4 +1,4 @@
-package com.g985892345.android
+package com.g985892345.extensions.android
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope

@@ -1,4 +1,4 @@
-package com.g985892345.gson
+package com.g985892345.extensions.gson
 
 import com.google.gson.Gson
 

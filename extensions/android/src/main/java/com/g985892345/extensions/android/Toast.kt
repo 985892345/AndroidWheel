@@ -1,4 +1,4 @@
-package com.g985892345.android
+package com.g985892345.extensions.android
 
 import android.content.Context
 import android.os.Handler
@@ -47,12 +47,12 @@ object ToastUtil {
       newInstance(context, text, duration).show()
     }
   }
-  
+
   private fun newInstance(
     context: Context,
     text: CharSequence,
     duration: Int
-  ) : Toast {
+  ): Toast {
     if (isDebuggableBuild) {
       val throwable = Throwable() // 获取堆栈信息
       val path = throwable.stackTrace
@@ -76,11 +76,11 @@ object ToastUtil {
     }
     return Toast.makeText(context, text, duration)
   }
-  
+
   /**
    * 寻找第一个满足条件后的子数组
    */
-  private fun <T> List<T>.after(first:(T) -> Boolean): List<T> {
+  private fun <T> List<T>.after(first: (T) -> Boolean): List<T> {
     val list = ArrayList<T>()
     var isFound = false
     forEach {
