@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="extensions_single_click_id" type="id" />
-    <item name="extensions_double_click_id" type="id" />
-    <item name="extensions_ClickableSpan_id" type="id" />
+    <item name="id_ClickableSpans_by_view" type="id"/>
+    <item name="id_single_click" type="id"/>
+    <item name="id_double_click" type="id"/>
 </resources>

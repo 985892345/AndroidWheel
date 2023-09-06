@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.g985892345.androidwheel.controller.TestController
 import com.g985892345.androidwheel.data.TestData
-import com.g985892345.utils.simplelistadapter.ISimpleList
+import com.g985892345.utils.adapter.simple.ISimpleList
 
 class MainActivity : AppCompatActivity() {
 

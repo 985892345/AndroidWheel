@@ -36,7 +36,8 @@ dependencies {
 ```kotlin
 dependencies {
   implementation("io.github.985892345:utils-context:x.y.z") // 无侵入式全局 context
-  implementation("io.github.985892345:utils-SimpleListAdapter:x.y.z") // ListAdpter 封装
+  implementation("io.github.985892345:utils-adapter:x.y.z") // Adapter 相关
+  implementation("io.github.985892345:utils-view:x.y.z") // View 相关
 }
 ```
 

@@ -37,7 +37,7 @@ android {
 
 dependencies {
 
-  implementation(project(":utils:SimpleListAdapter"))
+//  implementation(project(":utils:adapter"))
 
   implementation("androidx.core:core-ktx:1.8.0")
   implementation("androidx.appcompat:appcompat:1.6.1")

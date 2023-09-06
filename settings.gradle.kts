@@ -1,4 +1,5 @@
 pluginManagement {
+  includeBuild("build-logic")
   repositories {
     google()
     mavenCentral()
@@ -19,9 +20,22 @@ dependencyResolutionManagement {
 }
 rootProject.name = "AndroidWheel"
 include(":app")
-include(":utils:context")
-include(":extensions:android")
-include(":extensions:rxjava")
+
+// base
+include(":base:databinding")
+include(":base:ui")
+
+// extensions
 include(":extensions:rxpermissions")
+include(":extensions:rxjava")
 include(":extensions:gson")
-include(":utils:SimpleListAdapter")
+include(":extensions:android")
+
+// utils
+include(":utils:generics")
+include(":utils:adapter")
+include(":utils:view")
+include(":utils:context")
+
+// jvm
+include(":jvm:generics")

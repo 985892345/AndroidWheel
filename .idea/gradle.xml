@@ -4,6 +4,19 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/build-logic" name="build-logic">
+                <projects>
+                  <project path="$PROJECT_DIR$/build-logic" />
+                  <project path="$PROJECT_DIR$/build-logic/library" />
+                  <project path="$PROJECT_DIR$/build-logic/publish" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -12,15 +25,24 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/base/databinding" />
+            <option value="$PROJECT_DIR$/base/ui" />
+            <option value="$PROJECT_DIR$/build-logic" />
+            <option value="$PROJECT_DIR$/build-logic/library" />
+            <option value="$PROJECT_DIR$/build-logic/publish" />
             <option value="$PROJECT_DIR$/extensions" />
             <option value="$PROJECT_DIR$/extensions/android" />
             <option value="$PROJECT_DIR$/extensions/gson" />
             <option value="$PROJECT_DIR$/extensions/rxjava" />
             <option value="$PROJECT_DIR$/extensions/rxpermissions" />
+            <option value="$PROJECT_DIR$/jvm" />
+            <option value="$PROJECT_DIR$/jvm/generics" />
             <option value="$PROJECT_DIR$/utils" />
-            <option value="$PROJECT_DIR$/utils/SimpleListAdapter" />
+            <option value="$PROJECT_DIR$/utils/adapter" />
             <option value="$PROJECT_DIR$/utils/context" />
+            <option value="$PROJECT_DIR$/utils/generics" />
+            <option value="$PROJECT_DIR$/utils/view" />
           </set>
         </option>
       </GradleProjectSettings>
