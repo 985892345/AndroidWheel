@@ -7,15 +7,6 @@ plugins {
 }
 
 android {
-  publishing {
-    singleVariant("release") {
-      withJavadocJar()
-      withSourcesJar()
-    }
-  }
-}
-
-android {
   compileSdk = 33
 
   defaultConfig {
@@ -41,4 +32,15 @@ android {
 
 dependencies {
   implementation("androidx.appcompat:appcompat:1.6.1")
+}
+
+
+// 发布 maven 需要
+android {
+  publishing {
+    singleVariant("release") {
+      withJavadocJar()
+      withSourcesJar()
+    }
+  }
 }

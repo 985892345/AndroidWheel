@@ -5,5 +5,4 @@ plugins {
 dependencies {
   api(libs.android.gradlePlugin)
   api(libs.kotlin.gradlePlugin)
-  api(project(":publish"))
 }

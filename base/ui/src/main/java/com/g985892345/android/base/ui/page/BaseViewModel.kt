@@ -10,8 +10,8 @@ import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.g985892345.android.base.ui.utils.ToastUtils
-import com.g985892345.android.extensions.rxjava.RxjavaLifecycle
 import com.g985892345.android.utils.context.UtilsContext
+import com.g985892345.jvm.rxjava.RxjavaLifecycle
 import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow

@@ -16,8 +16,26 @@ abstract class Publish(project: Project) {
   var groupId = project.properties.getValue("GROUP").toString()
   var version = project.properties.getValue("VERSION").toString()
 
-  var mavenPublicationBlock: MavenPublication.() -> Unit = {
-    // Android 使用 release，jvm 模块使用 java
-    from(project.components["release"])
+  // 默认选择 Android 依赖
+  var publicationConfig : MavenPublicationConfig = MavenPublicationConfig.Android
+
+  sealed interface MavenPublicationConfig {
+    fun MavenPublication.configMaven(project: Project)
+
+    object Android : MavenPublicationConfig {
+      override fun MavenPublication.configMaven(project: Project) {
+        // 在 library.gradle.kts 中设置 release
+        from(project.components["release"])
+      }
+    }
+
+    object Jvm : MavenPublicationConfig {
+      override fun MavenPublication.configMaven(project: Project) {
+        // 在 jvm.gradle.kts 中设置 java
+        artifact(project.tasks["javadocJar"])
+        artifact(project.tasks["sourcesJar"])
+        from(project.components["java"])
+      }
+    }
   }
 }

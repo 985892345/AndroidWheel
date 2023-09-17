@@ -1,5 +1,5 @@
-# 生成模块以及其 api 模块都有的文件
-function generate_common_files() {
+# 生成 android 模块以及其 api 模块都有的文件
+function generate_android_files() {
   local folder_head=$1
   local folder_tail=$2
   # 创建模块文件夹
@@ -14,6 +14,16 @@ function generate_common_files() {
   </application>
 </manifest>'
   echo "$manifest" > "$folder_head/src/main/AndroidManifest.xml"
+}
+
+# 生成 jvm 模块以及其 api 模块都有的文件
+function generate_jvm_files() {
+  local folder_head=$1
+  local folder_tail=$2
+  # 创建模块文件夹
+  mkdir -p "$folder_head/src/main/java/com/g985892345/$folder_tail"
+  # 创建杂文件
+  echo "/build" > "$folder_head/.gitignore"
 }
 
 # 在 settings.gradle.kts 的 line 内容后插入 content

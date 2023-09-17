@@ -68,15 +68,7 @@ abstract class BaseBindFragment<VB : ViewBinding> : BaseFragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    val method = VB_METHOD_BY_CLASS.getOrPut(javaClass) {
-      getGenericClass<VB, ViewBinding>(javaClass).getMethod(
-        "inflate",
-        LayoutInflater::class.java,
-        ViewGroup::class.java,
-        Boolean::class.java
-      )
-    }
-    _binding = method.invoke(null, inflater, container, false) as VB
+    _binding = createBind(inflater, container, savedInstanceState)
     if (_binding is ViewDataBinding) {
       // ViewBinding 是 ViewBind 和 DataBind 共有的父类
       (binding as ViewDataBinding).lifecycleOwner = viewLifecycleOwner
@@ -89,6 +81,37 @@ abstract class BaseBindFragment<VB : ViewBinding> : BaseFragment() {
     }
     onCreateViewBefore(container, savedInstanceState)
     return binding.root
+  }
+
+  /**
+   * 创建 binding
+   *
+   * 目前采用反射创建，如果为了性能，可以重写后使用如下方式；
+   * ```
+   * override fun createBind(
+   *   inflater: LayoutInflater,
+   *   container: ViewGroup?,
+   *   savedInstanceState: Bundle?
+   * ): XXXBinding {
+   *   return XXXBinding.invoke(inflater, container, false)
+   * }
+   * ```
+   */
+  open fun createBind(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): VB {
+    val method = VB_METHOD_BY_CLASS.getOrPut(javaClass) {
+      getGenericClass<VB, ViewBinding>(javaClass).getMethod(
+        "inflate",
+        LayoutInflater::class.java,
+        ViewGroup::class.java,
+        Boolean::class.java
+      )
+    }
+    @Suppress("UNCHECKED_CAST")
+    return method.invoke(null, inflater, container, false) as VB
   }
   
   /**

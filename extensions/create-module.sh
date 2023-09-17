@@ -8,7 +8,7 @@ while ! [[ "$module_name" =~ ^[a-z][a-z0-9]+$ ]]; do
 done
 
 # 生成模块文件
-generate_common_files "$module_name" "extensions/$module_name"
+generate_android_files "$module_name" "extensions/$module_name"
 
 # 生成 build.gradle.kts, 这里单独生成, 没有使用 generate_build_gradle 函数
 echo -e "plugins {

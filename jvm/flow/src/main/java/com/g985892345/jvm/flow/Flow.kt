@@ -1,5 +1,6 @@
-package com.g985892345.android.extensions.android
+package com.g985892345.jvm.flow
 
+import com.g985892345.jvm.exception.ExceptionResult
 import kotlinx.coroutines.flow.*
 
 /**

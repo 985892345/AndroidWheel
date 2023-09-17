@@ -10,8 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.withStarted
 import com.g985892345.android.extensions.android.launch
-import com.g985892345.android.extensions.rxjava.RxjavaLifecycle
+import com.g985892345.android.extensions.rxjava.bindLifecycle
 import com.g985892345.android.utils.view.bind.BindView
+import com.g985892345.jvm.rxjava.RxjavaLifecycle
 import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.coroutines.flow.Flow
 
@@ -199,6 +200,6 @@ interface BaseUi : RxjavaLifecycle {
   // Rxjava 自动关流
   @Deprecated("内部方法，禁止调用", level = DeprecationLevel.HIDDEN)
   override fun onAddRxjava(disposable: Disposable) {
-    RxjavaLifecycle.onAddRxjavaByLifecycle(disposable, getViewLifecycleOwner().lifecycle)
+    bindLifecycle(disposable, getViewLifecycleOwner().lifecycle)
   }
 }

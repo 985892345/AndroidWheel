@@ -3,6 +3,7 @@ package com.g985892345.android.base.databinding.ui
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.viewbinding.ViewBinding
@@ -52,15 +53,8 @@ abstract class BaseBindActivity<VB : ViewBinding> : BaseActivity() {
   @CallSuper
   open fun onSetContentViewBefore() = Unit
   
-  @Suppress("UNCHECKED_CAST")
   protected val binding: VB by lazyUnlock {
-    val method = VB_METHOD_BY_CLASS.getOrPut(javaClass) {
-      getGenericClass<VB, ViewBinding>(javaClass).getMethod(
-        "inflate",
-        LayoutInflater::class.java
-      )
-    }
-    val binding = method.invoke(null, layoutInflater) as VB
+    val binding = createBind()
     if (binding is ViewDataBinding) {
       // ViewBinding 是 ViewBind 和 DataBind 共有的父类
       binding.lifecycleOwner = getViewLifecycleOwner()
@@ -81,6 +75,29 @@ abstract class BaseBindActivity<VB : ViewBinding> : BaseActivity() {
     super.setContentView(binding.root)
     // 注意：这里已经 setContentView()，请不要自己再次调用，否则 ViewBinding 会失效
   }
+
+
+  /**
+   * 创建 binding
+   *
+   * 目前采用反射创建，如果为了性能，可以重写后使用如下方式；
+   * ```
+   * override fun createBind(): XXXBinding {
+   *   return XXXBinding.invoke(layoutInflater)
+   * }
+   * ```
+   */
+  open fun createBind(): VB {
+    val method = VB_METHOD_BY_CLASS.getOrPut(javaClass) {
+      getGenericClass<VB, ViewBinding>(javaClass).getMethod(
+        "inflate",
+        LayoutInflater::class.java,
+      )
+    }
+    @Suppress("UNCHECKED_CAST")
+    return method.invoke(null, layoutInflater) as VB
+  }
+
   
   @Deprecated(
     "打个标记，因为使用了 ViewBinding，防止你忘记删除这个",

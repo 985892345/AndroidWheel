@@ -20,9 +20,24 @@ dependencyResolutionManagement {
 }
 ```
 
+## base 包
+
+```kotlin
+dependencies {
+  implementation("io.github.985892345:base-all:x.y.z") // 包含所有 base 包
+}
+dependencies {
+  implementation("io.github.985892345:base-ui:x.y.z") // BaseActivity、BaseFragment、BaseViewModel 基类
+  implementation("io.github.985892345:base-databinding:x.y.z") // BaseBindActivity、BaseBindFragment
+}
+```
+
 ## extensions 包
 
 ```kotlin
+dependencies {
+  implementation("io.github.985892345:extensions-all:x.y.z") // 包含所有 extensions 包
+}
 dependencies {
   implementation("io.github.985892345:extensions-android:x.y.z") // android 相关扩展
   implementation("io.github.985892345:extensions-gson:x.y.z") // gson 相关扩展
@@ -35,9 +50,26 @@ dependencies {
 
 ```kotlin
 dependencies {
+  implementation("io.github.985892345:utils-all:x.y.z") // 包含所有 utils 包
+}
+dependencies {
   implementation("io.github.985892345:utils-context:x.y.z") // 无侵入式全局 context
   implementation("io.github.985892345:utils-adapter:x.y.z") // Adapter 相关
   implementation("io.github.985892345:utils-view:x.y.z") // View 相关
+}
+```
+
+## jvm 包
+
+```kotlin
+dependencies {
+  implementation("io.github.985892345:jvm-all:x.y.z") // 包含所有 jvm 包
+}
+dependencies {
+  implementation("io.github.985892345:jvm-exception:x.y.z") // 异常处理
+  implementation("io.github.985892345:jvm-flow:x.y.z") // flow 扩展
+  implementation("io.github.985892345:jvm-generics:x.y.z") // 泛型工具
+  implementation("io.github.985892345:jvm-rxjava:x.y.z") // rxjava 扩展
 }
 ```
 

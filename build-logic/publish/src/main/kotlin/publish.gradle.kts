@@ -25,7 +25,7 @@ afterEvaluate {
         groupId = publish.groupId
         artifactId = projectArtifactId
         version = publish.version
-        publish.mavenPublicationBlock.invoke(this)
+        publish.publicationConfig.apply { configMaven(project) }
         signing {
           sign(this@create)
         }
