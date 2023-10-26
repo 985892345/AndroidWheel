@@ -5,12 +5,12 @@ plugins {
 
 android {
   namespace = "com.g985892345.androidwheel"
-  compileSdk = 33
+  compileSdk = 34
 
   defaultConfig {
     applicationId = "com.ndhzs.androidwheel"
     minSdk = 24
-    targetSdk = 33
+    targetSdk = 34
     versionCode = 1
     versionName = "1.0"
 

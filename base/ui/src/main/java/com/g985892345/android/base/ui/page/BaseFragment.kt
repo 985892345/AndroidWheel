@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.*
 import com.g985892345.android.base.ui.utils.ArgumentHelper
+import com.g985892345.android.base.ui.utils.ArgumentHelperNullable
 
 /**
  * 绝对基础的抽象
@@ -168,9 +169,12 @@ abstract class BaseFragment : Fragment, BaseUi {
    * ```
    */
   fun <T : Any> arguments() = ArgumentHelper<T>{ requireArguments() }
-  
-  
-  
+
+  /**
+   * 支持 null
+   */
+  fun <T> argumentsNullable() = ArgumentHelperNullable<T>{ requireArguments() }
+
   
   
   

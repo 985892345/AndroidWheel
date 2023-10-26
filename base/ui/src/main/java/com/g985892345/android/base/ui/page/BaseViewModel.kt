@@ -12,11 +12,17 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.g985892345.android.base.ui.utils.ToastUtils
 import com.g985892345.android.utils.context.UtilsContext
 import com.g985892345.jvm.rxjava.RxjavaLifecycle
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 /**
  *
@@ -95,22 +101,19 @@ abstract class BaseViewModel : ViewModel(), RxjavaLifecycle, ToastUtils {
   val appContext: Context
     get() = UtilsContext.appContext
   
-  private val mDisposableList = mutableListOf<Disposable>()
+  private val mDisposables = CompositeDisposable()
   
   @CallSuper
   override fun onCleared() {
     super.onCleared()
-    mDisposableList
-      .filter { !it.isDisposed }
-      .forEach { it.dispose() }
-    mDisposableList.clear()
+    mDisposables.clear()
   }
   
   /**
    * 开启协程并收集 Flow
    */
   protected fun <T> Flow<T>.collectLaunch(action: suspend (value: T) -> Unit) {
-    viewModelScope.launch {
+    launch {
       collect{ action.invoke(it) }
     }
   }
@@ -125,7 +128,7 @@ abstract class BaseViewModel : ViewModel(), RxjavaLifecycle, ToastUtils {
   protected fun <T> LiveData<T>.asShareFlow(): SharedFlow<T> {
     val sharedFlow = MutableSharedFlow<T>()
     observeForever {
-      viewModelScope.launch {
+      launch {
         sharedFlow.emit(it)
       }
     }
@@ -133,7 +136,11 @@ abstract class BaseViewModel : ViewModel(), RxjavaLifecycle, ToastUtils {
   }
   
   
-  
+  protected fun launch(
+    context: CoroutineContext = EmptyCoroutineContext,
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    block: suspend CoroutineScope.() -> Unit
+  ): Job = viewModelScope.launch(context, start, block)
   
   
   
@@ -143,7 +150,7 @@ abstract class BaseViewModel : ViewModel(), RxjavaLifecycle, ToastUtils {
    * 实现 [RxjavaLifecycle] 的方法，用于带有生命周期的调用
    */
   final override fun onAddRxjava(disposable: Disposable) {
-    mDisposableList.add(disposable)
+    mDisposables.add(disposable)
   }
 }
 

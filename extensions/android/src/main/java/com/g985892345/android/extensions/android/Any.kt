@@ -10,7 +10,4 @@ package com.g985892345.android.extensions.android
  */
 
 @Suppress("UNCHECKED_CAST")
-fun <T> Any.cast(): T = this as T
-
-@Suppress("UNCHECKED_CAST")
-fun <T> Any?.cast2(): T = this as T
+fun <T> Any?.cast(): T = this as T

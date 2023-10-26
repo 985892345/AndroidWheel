@@ -14,6 +14,7 @@ import com.g985892345.android.extensions.rxjava.bindLifecycle
 import com.g985892345.android.utils.view.bind.BindView
 import com.g985892345.jvm.rxjava.RxjavaLifecycle
 import io.reactivex.rxjava3.disposables.Disposable
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -62,18 +63,18 @@ import kotlinx.coroutines.flow.Flow
  * @email guo985892345@foxmail.com
  * @date 2022/7/20 19:44
  */
-interface BaseUi : RxjavaLifecycle {
+sealed interface BaseUi : RxjavaLifecycle {
 
   /**
    * 根布局
    */
   val rootView: View
-  
+
   /**
    * View 的 LifecycleOwner
    */
   fun getViewLifecycleOwner(): LifecycleOwner
-  
+
   /**
    * 在简单界面，使用这种方式来得到 View，避免使用 ViewBinding 大材小用
    * ```
@@ -96,7 +97,7 @@ interface BaseUi : RxjavaLifecycle {
     is ComponentDialog -> BindView(this, this@BaseUi)
     else -> error("未实现，请自己实现该功能！")
   }
-  
+
   /**
    * 尤其注意这个 viewLifecycleOwner
    *
@@ -105,7 +106,7 @@ interface BaseUi : RxjavaLifecycle {
   fun <T> LiveData<T>.observe(observer: (T) -> Unit) {
     observe(getViewLifecycleOwner(), observer)
   }
-  
+
   /**
    * 只观察一次 LiveData
    */
@@ -123,7 +124,7 @@ interface BaseUi : RxjavaLifecycle {
       }
     )
   }
-  
+
   /**
    * 观察 LiveData 直到返回 true
    * @param observer 返回 true，则停止观察；返回 false，则继续观察
@@ -143,16 +144,14 @@ interface BaseUi : RxjavaLifecycle {
       }
     )
   }
-  
+
   fun <T> Flow<T>.collectLaunch(
     owner: LifecycleOwner = getViewLifecycleOwner(),
     action: suspend (value: T) -> Unit
-  ) {
-    owner.launch {
-      collect { action.invoke(it) }
-    }
+  ): Job = owner.launch {
+    collect { action.invoke(it) }
   }
-  
+
   /**
    * 结合生命周期收集 Flow 方法，在进入后台的时候会自动挂起
    *
@@ -163,16 +162,15 @@ interface BaseUi : RxjavaLifecycle {
   fun <T> Flow<T>.collectSuspend(
     owner: LifecycleOwner = getViewLifecycleOwner(),
     action: suspend (value: T) -> Unit
-  ) {
-    owner.launch {
-      owner.withStarted {
-        owner.launch {
-          collect { action.invoke(it) }
-        }
+  ): Job = owner.launch {
+    owner.withStarted {
+      owner.launch {
+        collect { action.invoke(it) }
       }
     }
   }
-  
+
+
   /**
    * 结合生命周期收集 Flow 方法，在进入后台的时候会自动取消
    *
@@ -186,15 +184,7 @@ interface BaseUi : RxjavaLifecycle {
   fun <T> Flow<T>.collectRestart(
     owner: LifecycleOwner = getViewLifecycleOwner(),
     action: suspend (value: T) -> Unit
-  ) {
-    flowWithLifecycle(owner.lifecycle).collectLaunch(owner, action)
-  }
-
-
-
-
-
-
+  ): Job = flowWithLifecycle(owner.lifecycle).collectLaunch(owner, action)
 
 
   // Rxjava 自动关流

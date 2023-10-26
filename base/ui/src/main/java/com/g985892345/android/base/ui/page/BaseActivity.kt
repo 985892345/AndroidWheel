@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.g985892345.android.base.ui.utils.IntentHelper
+import com.g985892345.android.base.ui.utils.IntentHelperNullable
 import com.g985892345.android.extensions.android.isDaytimeMode
 
 /**
@@ -66,7 +68,11 @@ import com.g985892345.android.extensions.android.isDaytimeMode
  * @email 2767465918@qq.com
  * @date 2021/5/25
  */
-abstract class BaseActivity : AppCompatActivity(), BaseUi {
+abstract class BaseActivity : AppCompatActivity, BaseUi {
+
+  constructor() : super()
+
+  constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
   
   /**
    * 是否锁定竖屏
@@ -198,4 +204,8 @@ abstract class BaseActivity : AppCompatActivity(), BaseUi {
    */
   inline fun <reified T : Any> intent() = IntentHelper(T::class.java) { intent }
 
+  /**
+   * 支持 null
+   */
+  inline fun <reified T> intentNullable() = IntentHelperNullable(T::class.java) { intent }
 }

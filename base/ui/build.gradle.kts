@@ -11,7 +11,7 @@ dependencies {
   api("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
   api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
   // https://developer.android.google.cn/kotlin/ktx/extensions-list#androidxactivity
-  api("androidx.activity:activity-ktx:1.7.2")
+  api("androidx.activity:activity-ktx:1.8.0")
   // https://developer.android.google.cn/kotlin/ktx/extensions-list#androidxfragmentapp
   api("androidx.fragment:fragment-ktx:1.6.1")
 

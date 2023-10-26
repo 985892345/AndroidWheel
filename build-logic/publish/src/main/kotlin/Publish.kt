@@ -16,8 +16,12 @@ abstract class Publish(project: Project) {
   var groupId = project.properties.getValue("GROUP").toString()
   var version = project.properties.getValue("VERSION").toString()
 
-  // 默认选择 Android 依赖
-  var publicationConfig : MavenPublicationConfig = MavenPublicationConfig.Android
+  var publicationConfig : MavenPublicationConfig = when {
+    project.plugins.hasPlugin("com.android.library") -> MavenPublicationConfig.Android
+    project.plugins.hasPlugin("org.jetbrains.kotlin.jvm")  -> MavenPublicationConfig.Jvm
+    project.plugins.hasPlugin("java") -> MavenPublicationConfig.Jvm
+    else -> error("未实现")
+  }
 
   sealed interface MavenPublicationConfig {
     fun MavenPublication.configMaven(project: Project)

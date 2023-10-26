@@ -3,10 +3,13 @@ plugins {
 }
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_17
-  targetCompatibility = JavaVersion.VERSION_17
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
 }
 
+kotlin {
+  jvmToolchain(11)
+}
 
 // 发布 maven 需要
 val sourceSets = extensions.getByName("sourceSets") as SourceSetContainer

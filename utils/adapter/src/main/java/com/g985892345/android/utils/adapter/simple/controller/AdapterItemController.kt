@@ -4,7 +4,7 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.g985892345.android.utils.adapter.simple.data.IAdapterData
-import com.g985892345.android.utils.adapter.simple.utils.GenericityUtils
+import com.g985892345.jvm.generics.GenericsUtils
 
 /**
  * .
@@ -22,7 +22,7 @@ abstract class AdapterItemController<Data : IAdapterData, VH : RecyclerView.View
    * 默认使用反射获取，但这种写法需要子类的父类写明泛型类型，即只允许继承一次
    */
   open val dataClass: Class<Data> by lazy {
-    GenericityUtils.getGenericClass<Data, IAdapterData>(javaClass)
+    GenericsUtils.getGenericClass<Data, IAdapterData>(javaClass)
   }
 
   abstract fun onCreate(view: View): VH
