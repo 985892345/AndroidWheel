@@ -17,15 +17,20 @@ class IntentHelperNullable<T>(
 ) : ReadWriteProperty<Any, T?> {
   
   private var mValue: T? = null
-  
-  @Suppress("UNCHECKED_CAST")
+
+  @Suppress("DEPRECATION") // 抑制 sdk33 的 getSerializableExtra() 方法
   override fun getValue(thisRef: Any, property: KProperty<*>): T? {
     if (mValue != null) return mValue
     val name = property.name
+    @Suppress("UNCHECKED_CAST")
     mValue = intent.invoke().run {
       // 因为 intent 的 getExtra() 方法被废弃，所以只能一个一个判断
       when (clazz) {
         String::class.java -> getStringExtra(name)
+
+        List::class.java -> getSerializableExtra(name)
+        Set::class.java -> getSerializableExtra(name)
+        Map::class.java -> getSerializableExtra(name)
         
         Int::class.java -> getIntExtra(name, Int.MIN_VALUE)
         Boolean::class.java -> getBooleanExtra(name, false)
@@ -50,7 +55,6 @@ class IntentHelperNullable<T>(
           val componentType = clazz.componentType!!
           when {
             Parcelable::class.java.isAssignableFrom(componentType) -> {
-              @Suppress("DEPRECATION") // sdk33 才能新方法
               getParcelableArrayExtra(name)
             }
             String::class.java.isAssignableFrom(componentType) -> {
@@ -60,7 +64,6 @@ class IntentHelperNullable<T>(
               getCharSequenceArrayExtra(name)
             }
             Serializable::class.java.isAssignableFrom(componentType) -> {
-              @Suppress("DEPRECATION") // sdk33 才能新方法
               getSerializableExtra(name)
             }
             else -> {
@@ -75,10 +78,8 @@ class IntentHelperNullable<T>(
           when {
             CharSequence::class.java.isAssignableFrom(clazz) -> getCharExtra(name, ' ')
             Parcelable::class.java.isAssignableFrom(clazz) ->
-              @Suppress("DEPRECATION") // 抑制 sdk33 新方法
               getParcelableExtra<Parcelable>(name) // 这里类型推导会出问题，必须加泛型
             Serializable::class.java.isAssignableFrom(clazz) ->
-              @Suppress("DEPRECATION") // 抑制 sdk33 新方法
               getSerializableExtra(name)
             else -> null
           }
