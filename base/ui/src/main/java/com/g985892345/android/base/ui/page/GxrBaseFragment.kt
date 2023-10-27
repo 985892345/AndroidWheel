@@ -73,12 +73,12 @@ import com.g985892345.android.base.ui.utils.ArgumentHelperNullable
  *
  *
  *
- * # 更多封装请往父类和接口查看，[BaseUi] 必看
+ * # 更多封装请往父类和接口查看，[GxrBaseUi] 必看
  * @author 985892345
  * @email 2767465918@qq.com
  * @date 2021/5/25
  */
-abstract class BaseFragment : Fragment, BaseUi {
+abstract class GxrBaseFragment : Fragment, GxrBaseUi {
   
   constructor() : super()
   

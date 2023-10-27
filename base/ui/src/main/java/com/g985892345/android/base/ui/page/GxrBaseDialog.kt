@@ -12,7 +12,7 @@ import androidx.lifecycle.LifecycleOwner
  * @author 985892345
  * @date 2023/10/26 19:06
  */
-abstract class BaseDialog : ComponentDialog, BaseUi {
+abstract class GxrBaseDialog : ComponentDialog, GxrBaseUi {
 
   constructor(context: Context) : super(context)
 

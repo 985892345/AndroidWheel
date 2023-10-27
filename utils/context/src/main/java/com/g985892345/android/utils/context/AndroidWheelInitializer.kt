@@ -16,9 +16,21 @@ import androidx.startup.Initializer
  */
 @Keep
 class AndroidWheelInitializer : Initializer<Unit> {
+
+  companion object {
+    internal lateinit var application: Application
+      private set
+  }
+
   override fun create(context: Context) {
-    UtilsContext.setApplication(context.applicationContext as Application)
+    application = context.applicationContext as Application
   }
 
   override fun dependencies(): List<Class<out Initializer<*>>> = emptyList()
 }
+
+val application: Application
+  get() = AndroidWheelInitializer.application
+
+val appContext: Context
+  get() = application

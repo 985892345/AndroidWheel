@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.viewbinding.ViewBinding
-import com.g985892345.android.base.ui.page.BaseFragment
+import com.g985892345.android.base.ui.page.GxrBaseFragment
 import com.g985892345.android.extensions.android.isDebuggableBuild
 import com.g985892345.android.extensions.android.mainHandler
 import com.g985892345.android.extensions.android.toast
@@ -27,7 +27,7 @@ import java.lang.reflect.Method
  * ```
  *
  * ## 一、获取 ViewModel 的规范写法
- * 请查看该父类 [BaseFragment]
+ * 请查看该父类 [GxrBaseFragment]
  *
  *
  *
@@ -38,11 +38,11 @@ import java.lang.reflect.Method
  * @email 2767465918@qq.com
  * @data 2021/6/2
  */
-abstract class BaseBindFragment<VB : ViewBinding> : BaseFragment() {
+abstract class GxrBaseBindFragment<VB : ViewBinding> : GxrBaseFragment() {
   
   companion object {
     // VB inflate() 缓存。key 为 javaClass，value 为 VB 的 inflate 方法
-    private val VB_METHOD_BY_CLASS = hashMapOf<Class<out BaseBindFragment<*>>, Method>()
+    private val VB_METHOD_BY_CLASS = hashMapOf<Class<out GxrBaseBindFragment<*>>, Method>()
   }
 
   @CallSuper

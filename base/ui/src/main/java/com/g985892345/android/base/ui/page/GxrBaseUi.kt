@@ -63,7 +63,7 @@ import kotlinx.coroutines.flow.Flow
  * @email guo985892345@foxmail.com
  * @date 2022/7/20 19:44
  */
-sealed interface BaseUi : RxjavaLifecycle {
+sealed interface GxrBaseUi : RxjavaLifecycle {
 
   /**
    * 根布局
@@ -91,10 +91,10 @@ sealed interface BaseUi : RxjavaLifecycle {
    * ViewBinding 是给所有布局都默认开启的，大项目会严重拖垮编译速度
    * ```
    */
-  fun <T : View> Int.view() = when (this@BaseUi) {
-    is ComponentActivity -> BindView<T>(this, this@BaseUi)
-    is Fragment -> BindView(this, this@BaseUi)
-    is ComponentDialog -> BindView(this, this@BaseUi)
+  fun <T : View> Int.view() = when (this@GxrBaseUi) {
+    is ComponentActivity -> BindView<T>(this, this@GxrBaseUi)
+    is Fragment -> BindView(this, this@GxrBaseUi)
+    is ComponentDialog -> BindView(this, this@GxrBaseUi)
     else -> error("未实现，请自己实现该功能！")
   }
 

@@ -3,16 +3,15 @@ package com.g985892345.android.base.databinding.ui
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.databinding.ViewDataBinding
 import androidx.viewbinding.ViewBinding
-import com.g985892345.android.base.ui.page.BaseActivity
+import com.g985892345.android.base.ui.page.GxrBaseActivity
 import com.g985892345.android.extensions.android.isDebuggableBuild
 import com.g985892345.android.extensions.android.lazyUnlock
 import com.g985892345.android.extensions.android.toast
 import com.g985892345.jvm.generics.GenericsUtils.getGenericClass
-import com.g985892345.android.base.ui.page.BaseFragment
+import com.g985892345.android.base.ui.page.GxrBaseFragment
 import java.lang.reflect.Method
 
 /**
@@ -28,7 +27,7 @@ import java.lang.reflect.Method
  * ```
  *
  * ## 一、获取 ViewModel 的规范写法
- * 请查看该父类 [BaseFragment]
+ * 请查看该父类 [GxrBaseFragment]
  *
  *
  *
@@ -40,11 +39,11 @@ import java.lang.reflect.Method
  * @email 2767465918@qq.com
  * @data 2021/6/2
  */
-abstract class BaseBindActivity<VB : ViewBinding> : BaseActivity() {
+abstract class GxrBaseBindActivity<VB : ViewBinding> : GxrBaseActivity() {
   
   companion object {
     // VB inflate() 缓存。key 为 javaClass，value 为 VB 的 inflate 方法
-    private val VB_METHOD_BY_CLASS = hashMapOf<Class<out BaseBindActivity<*>>, Method>()
+    private val VB_METHOD_BY_CLASS = hashMapOf<Class<out GxrBaseBindActivity<*>>, Method>()
   }
   
   /**

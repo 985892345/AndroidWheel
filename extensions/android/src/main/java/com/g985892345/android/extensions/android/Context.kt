@@ -1,12 +1,11 @@
 package com.g985892345.android.extensions.android
 
-import android.content.Context
 import android.content.pm.ApplicationInfo
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.coroutineScope
-import com.g985892345.android.utils.context.UtilsContext
+import com.g985892345.android.utils.context.appContext
 
 /**
  * ...
@@ -14,9 +13,6 @@ import com.g985892345.android.utils.context.UtilsContext
  * @email 2767465918@qq.com
  * @date 2022/5/30 15:57
  */
-
-val appContext: Context
-  get() = UtilsContext.appContext
 
 /**
  * 应用程序的生命周期

@@ -1,6 +1,5 @@
 package com.g985892345.android.base.ui.page
 
-import android.content.Context
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.annotation.CallSuper
@@ -10,7 +9,6 @@ import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.g985892345.android.base.ui.utils.ToastUtils
-import com.g985892345.android.utils.context.UtilsContext
 import com.g985892345.jvm.rxjava.RxjavaLifecycle
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -96,11 +94,8 @@ import kotlin.coroutines.EmptyCoroutineContext
  *
  * # 更多封装请往父类和接口查看
  */
-abstract class BaseViewModel : ViewModel(), RxjavaLifecycle, ToastUtils {
-  
-  val appContext: Context
-    get() = UtilsContext.appContext
-  
+abstract class GxrBaseViewModel : ViewModel(), RxjavaLifecycle, ToastUtils {
+
   private val mDisposables = CompositeDisposable()
   
   @CallSuper

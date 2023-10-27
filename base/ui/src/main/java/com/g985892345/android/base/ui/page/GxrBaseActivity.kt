@@ -63,12 +63,12 @@ import com.g985892345.android.extensions.android.isDaytimeMode
  *
  *
  *
- * # 更多封装请往父类和接口查看，[BaseUi] 必看
+ * # 更多封装请往父类和接口查看，[GxrBaseUi] 必看
  * @author 985892345
  * @email 2767465918@qq.com
  * @date 2021/5/25
  */
-abstract class BaseActivity : AppCompatActivity, BaseUi {
+abstract class GxrBaseActivity : AppCompatActivity, GxrBaseUi {
 
   constructor() : super()
 
