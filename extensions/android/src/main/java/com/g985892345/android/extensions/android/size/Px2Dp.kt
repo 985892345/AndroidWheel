@@ -1,6 +1,6 @@
 package com.g985892345.android.extensions.android.size
 
-import com.g985892345.android.extensions.android.appContext
+import com.g985892345.android.utils.context.appContext
 import kotlin.math.roundToInt
 
 /**

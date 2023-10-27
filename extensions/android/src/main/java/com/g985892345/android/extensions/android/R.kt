@@ -5,6 +5,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import com.g985892345.android.utils.context.appContext
 
 /**
  * .

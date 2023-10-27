@@ -1,6 +1,7 @@
 package com.g985892345.android.extensions.android
 
 import android.content.res.Configuration
+import com.g985892345.android.utils.context.appContext
 
 
 /**

@@ -3,7 +3,7 @@ package com.g985892345.android.extensions.android.size
 import android.os.Build
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_SP
-import com.g985892345.android.extensions.android.appContext
+import com.g985892345.android.utils.context.appContext
 import kotlin.math.roundToInt
 
 /**
