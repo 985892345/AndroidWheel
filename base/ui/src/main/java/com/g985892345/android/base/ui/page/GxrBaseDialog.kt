@@ -7,7 +7,7 @@ import androidx.annotation.StyleRes
 import androidx.lifecycle.LifecycleOwner
 
 /**
- * .
+ * 带有 Lifecycle 的 Dialog
  *
  * @author 985892345
  * @date 2023/10/26 19:06

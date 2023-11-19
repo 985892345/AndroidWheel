@@ -18,14 +18,6 @@ import java.lang.reflect.Method
  *
  * 该类封装了 DataBind，可直接使用 [binding] 获得
  *
- * ## 零、使用 DataBinding 需要打开开关
- * ```
- * // 在你模块的 build.gradle.kts 中调用
- * useDataBinding()
- *
- * // 如果你只依赖 DataBinding 而不开启 DataBinding 这个功能，可以给上述函数传入 true 参数
- * ```
- *
  * ## 一、获取 ViewModel 的规范写法
  * 请查看该父类 [GxrBaseFragment]
  *
@@ -57,7 +49,6 @@ abstract class GxrBaseBindFragment<VB : ViewBinding> : GxrBaseFragment() {
     get() = _binding!!
   
   @CallSuper
-  @Suppress("UNCHECKED_CAST")
   @Deprecated(
     "不建议重写该方法，请使用 onCreateViewBefore() 代替",
     ReplaceWith("onCreateViewBefore(container, savedInstanceState)"),
@@ -72,12 +63,6 @@ abstract class GxrBaseBindFragment<VB : ViewBinding> : GxrBaseFragment() {
     if (_binding is ViewDataBinding) {
       // ViewBinding 是 ViewBind 和 DataBind 共有的父类
       (binding as ViewDataBinding).lifecycleOwner = viewLifecycleOwner
-    } else {
-      // 目前掌邮更建议使用 DataBind，因为 ViewBind 是白名单模式，默认所有 xml 生成类，严重影响编译速度
-      // 但 DataBind 不是很推荐使用双向绑定，因为 xml 中写代码以后很难维护
-      if (isDebuggableBuild) {
-        toast("更推荐使用 DataBind (Fragment: ${this::class.simpleName})")
-      }
     }
     onCreateViewBefore(container, savedInstanceState)
     return binding.root

@@ -107,12 +107,10 @@ abstract class GxrBaseViewModel : ViewModel(), RxjavaLifecycle, ToastUtils {
   /**
    * 开启协程并收集 Flow
    */
-  protected fun <T> Flow<T>.collectLaunch(action: suspend (value: T) -> Unit) {
-    launch {
-      collect{ action.invoke(it) }
-    }
+  protected fun <T> Flow<T>.collectLaunch(action: suspend (value: T) -> Unit): Job = launch {
+    collect{ action.invoke(it) }
   }
-  
+
   /**
    * 返回一个缓存值为 0 表示事件的 SharedFlow，不会因为 Activity 重建而出现数据倒灌问题
    *
