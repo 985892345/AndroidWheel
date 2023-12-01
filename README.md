@@ -53,8 +53,9 @@ dependencies {
   implementation("io.github.985892345:utils-all:x.y.z") // 包含所有 utils 包
 }
 dependencies {
-  implementation("io.github.985892345:utils-context:x.y.z") // 无侵入式全局 context
   implementation("io.github.985892345:utils-adapter:x.y.z") // Adapter 相关
+  implementation("io.github.985892345:utils-context:x.y.z") // 无侵入式全局 context
+  implementation("io.github.985892345:utils-impl:x.y.z") // 一些接口的默认实现
   implementation("io.github.985892345:utils-view:x.y.z") // View 相关
 }
 ```
@@ -69,6 +70,7 @@ dependencies {
   implementation("io.github.985892345:jvm-exception:x.y.z") // 异常处理
   implementation("io.github.985892345:jvm-flow:x.y.z") // flow 扩展
   implementation("io.github.985892345:jvm-generics:x.y.z") // 泛型工具
+  implementation("io.github.985892345:jvm-impl:x.y.z") // by defaultImpl() 快速实现接口
   implementation("io.github.985892345:jvm-rxjava:x.y.z") // rxjava 扩展
 }
 ```

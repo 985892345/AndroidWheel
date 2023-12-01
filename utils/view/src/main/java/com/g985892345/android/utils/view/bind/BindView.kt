@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewTreeLifecycleOwner
 import com.g985892345.android.utils.context.appContext
 import java.lang.ref.WeakReference
 import kotlin.properties.ReadOnlyProperty
@@ -86,6 +87,12 @@ class BindView<V : View>(
   val findView: (Int) -> V,
   val getLifecycle: () -> Lifecycle,
 ) : ReadOnlyProperty<Any, V> {
+
+  constructor(@IdRes resId: Int, root: View) : this(
+    resId,
+    { root.findViewById(it) },
+    { ViewTreeLifecycleOwner.get(root)!!.lifecycle }
+  )
   
   constructor(@IdRes resId: Int, activity: ComponentActivity) : this(
     resId,

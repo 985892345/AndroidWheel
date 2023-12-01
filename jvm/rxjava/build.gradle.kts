@@ -7,5 +7,5 @@ publish.publicationConfig = Publish.MavenPublicationConfig.Jvm
 
 dependencies {
   api(project(":jvm:exception"))
-  api("io.reactivex.rxjava3:rxjava:3.1.6")
+  api("io.reactivex.rxjava3:rxjava:3.1.8")
 }

@@ -17,8 +17,6 @@
             </builds>
           </compositeBuild>
         </compositeConfiguration>
-        <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="jbr-17" />
         <option name="modules">
@@ -43,14 +41,17 @@
             <option value="$PROJECT_DIR$/jvm/exception" />
             <option value="$PROJECT_DIR$/jvm/flow" />
             <option value="$PROJECT_DIR$/jvm/generics" />
+            <option value="$PROJECT_DIR$/jvm/impl" />
             <option value="$PROJECT_DIR$/jvm/rxjava" />
             <option value="$PROJECT_DIR$/utils" />
             <option value="$PROJECT_DIR$/utils/adapter" />
             <option value="$PROJECT_DIR$/utils/all" />
             <option value="$PROJECT_DIR$/utils/context" />
+            <option value="$PROJECT_DIR$/utils/impl" />
             <option value="$PROJECT_DIR$/utils/view" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
