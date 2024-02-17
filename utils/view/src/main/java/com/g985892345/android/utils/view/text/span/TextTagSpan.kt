@@ -1,4 +1,4 @@
-package com.g985892345.android.utils.text.span
+package com.g985892345.android.utils.view.text.span
 
 import android.content.Context
 import android.graphics.Canvas

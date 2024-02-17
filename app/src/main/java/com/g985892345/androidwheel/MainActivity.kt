@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.widget.ImageView
 import android.widget.TextView
-import com.g985892345.android.utils.text.span.TextTagSpan
+import com.g985892345.android.utils.view.text.span.TextTagSpan
 
 class MainActivity : AppCompatActivity() {
 

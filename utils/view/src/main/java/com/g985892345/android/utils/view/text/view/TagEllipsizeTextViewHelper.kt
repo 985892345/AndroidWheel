@@ -1,16 +1,29 @@
-package com.g985892345.android.utils.text.view
+package com.g985892345.android.utils.view.text.view
 
 import android.text.Layout
 import android.text.SpannableStringBuilder
 import android.text.Spanned
+import android.text.TextPaint
+import android.text.style.CharacterStyle
 import android.view.View
 import android.view.View.MeasureSpec
 import android.widget.TextView
-import com.g985892345.android.utils.text.span.MarginSpan
-import com.g985892345.android.utils.text.span.TextTagSpan
+import com.g985892345.android.utils.view.text.span.MarginSpan
+import com.g985892345.android.utils.view.text.span.TextTagSpan
 
 /**
- * .
+ * 支持给文本末尾添加标签的 EmojiTextView
+ *
+ * 功能:
+ * - 文本末尾添加标签，标签使用 View，支持自定义
+ * - 支持设置 maxLine，在文本超 maxLines 时，文本进行 ... 省略，标签显示在 ... 之后，如下图
+ * ```
+ *    abcdefghijk
+ *    lmn...[TAG]
+ * ```
+ *
+ * 注意:
+ * - 不要设置 android:ellipsize="end"，设置后会失效，跟 TextView 底层计算宽度有关
  *
  * @author 985892345
  * @date 2023/11/30 11:08
@@ -51,7 +64,7 @@ class TagEllipsizeTextViewHelper(
       val builder = SpannableStringBuilder.valueOf(originText)
       val spans = builder.getSpans(0, builder.length, TextTagSpan::class.java)
       if (spans != null && spans.contains(tagSpan)) {
-        // 已经添加上了
+        // 已经添加上了，防止因为设置 text 可能造成的 onMeasure 循环
         return
       }
     }
@@ -59,7 +72,9 @@ class TagEllipsizeTextViewHelper(
       setSpan(tagSpan, 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
     if (textView.layout.lineCount < textView.maxLines || textView.maxLines == -1) {
-
+      resetTextLessThanMaxLines(originText, suffixTagSpannable, width)
+    } else {
+      resetTextGreaterOrEqualMaxLines(originText, suffixTagSpannable, width)
     }
   }
 
@@ -91,7 +106,6 @@ class TagEllipsizeTextViewHelper(
     suffixTagBuilder: SpannableStringBuilder,
     width: Int,
   ) {
-    val lineStartIndex = textView.layout.getLineStart(textView.maxLines - 1)
     val lineEndIndex = textView.layout.getLineEnd(textView.maxLines - 1)
     val lineWidth = textView.layout.getLineWidth(textView.maxLines - 1)
     val tagWidth = Layout.getDesiredWidth(suffixTagBuilder, textView.paint)
@@ -110,35 +124,53 @@ class TagEllipsizeTextViewHelper(
       val moreWidth = Layout.getDesiredWidth(More, textView.paint)
       val widthDiff = (lineWidth + moreWidth + mMargin + tagWidth - width).toInt()
       // 需要 remove 掉的字符数量
-      // todo 待完成
+      val removedCharacterCount = computeRemovedCharacterCount(
+        widthDiff, originText.subSequence(0, lineEndIndex), textView.paint)
+      val marginSpan = SpannableStringBuilder(" ").apply {
+        setSpan(MarginSpan(mMargin), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+      }
+      var subStr = originText.subSequence(0, lineEndIndex - removedCharacterCount)
+      if (subStr.endsWith('\n')) {
+        subStr = subStr.subSequence(0, subStr.length - 1)
+      }
+      textView.text = SpannableStringBuilder(subStr)
+        .append(More)
+        .append(marginSpan)
+        .append(suffixTagBuilder)
     }
   }
 
-//  private fun computeRemovedCharacterCount(
-//    widthDiff: Int,
-//    text: CharSequence,
-//    paint: TextPaint
-//  ): Int {
-//    if (text.isEmpty()) return 0
-//    val builder = SpannableStringBuilder.valueOf(text)
-//    val characterStyles = builder.getSpans(0, builder.length, CharacterStyle::class.java)
-//    var removed = 1
-//    while (true) {
-//      var end = text.length - removed
-//      Layout.getDesiredWidth(text.subSequence())
-//      for (style in characterStyles) {
-//        val spanStart = builder.getSpanStart(style)
-//        val spanEnd = builder.getSpanEnd(style)
-//        if (end in spanStart until spanEnd) {
-//          removed = text.length - spanStart
-//        }
-//      }
-//    }
-//  }
-//
-//  private fun computeCharacterStyleRanged(text: CharSequence): List<> {
-//
-//  }
+  private fun computeRemovedCharacterCount(
+    widthDiff: Int,
+    text: CharSequence,
+    paint: TextPaint
+  ): Int {
+    if (text.isEmpty()) return 0
+    val builder = SpannableStringBuilder.valueOf(text)
+    val characterStyles = builder
+      .getSpans(0, builder.length, CharacterStyle::class.java).toMutableList()
+    var index = getRemoveIndex(builder.length - 1, builder, characterStyles)
+    while (Layout.getDesiredWidth(text.subSequence(index, builder.length), paint) < widthDiff) {
+      index = getRemoveIndex(index - 1, builder, characterStyles)
+    }
+    return builder.length - index
+  }
+
+  private fun getRemoveIndex(
+    index: Int,
+    builder: SpannableStringBuilder,
+    characterStyles: MutableList<CharacterStyle>
+  ): Int {
+    for (style in characterStyles) {
+      val spanStart = builder.getSpanStart(style)
+      val spanEnd = builder.getSpanEnd(style)
+      if (index in spanStart until spanEnd) {
+        characterStyles.remove(style)
+        return spanStart
+      }
+    }
+    return index
+  }
 
   companion object {
     private const val More = "..."
