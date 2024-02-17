@@ -1,9 +1,6 @@
 package com.g985892345.android.base.ui.page
 
 import android.view.View
-import androidx.activity.ComponentActivity
-import androidx.activity.ComponentDialog
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -72,8 +69,22 @@ sealed interface GxrBaseUi : RxjavaLifecycle {
 
   /**
    * View 的 LifecycleOwner
+   *
+   * 注意：如果是 Fragment，则可能因为没有初始化 View 而报错，
+   * 使用 [doOnCreateContentView] 回调后再去拿 LifecycleOwner
    */
   fun getViewLifecycleOwner(): LifecycleOwner
+
+  /**
+   * 创建 View 时的回调，该方法可用于外界获取 View 对象
+   *
+   * 请留意以下情况；
+   * - 如果添加时已经创建了 View，则会立马回调
+   * - Fragment 因为与 View 生命周期不一致所以存在多次回调的情况
+   *
+   * @return 返回非 null 值则继续观察下一次回调，用于 Fragment 中
+   */
+  fun doOnCreateContentView(action: (rootView: View) -> Any?)
 
   /**
    * 在简单界面，使用这种方式来得到 View，避免使用 ViewBinding 大材小用
@@ -91,12 +102,7 @@ sealed interface GxrBaseUi : RxjavaLifecycle {
    * ViewBinding 是给所有布局都默认开启的，大项目会严重拖垮编译速度
    * ```
    */
-  fun <T : View> Int.view() = when (this@GxrBaseUi) {
-    is ComponentActivity -> BindView<T>(this, this@GxrBaseUi)
-    is Fragment -> BindView(this, this@GxrBaseUi)
-    is ComponentDialog -> BindView(this, this@GxrBaseUi)
-    else -> error("未实现，请自己实现该功能！")
-  }
+  fun <T : View> Int.view(): BindView<T>
 
   /**
    * 尤其注意这个 viewLifecycleOwner

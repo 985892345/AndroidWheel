@@ -17,6 +17,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.g985892345.android.base.ui.utils.IntentHelper
 import com.g985892345.android.base.ui.utils.IntentHelperNullable
 import com.g985892345.android.extensions.android.isDaytimeMode
+import com.g985892345.android.utils.view.bind.BindView
 
 /**
  * 绝对基础的抽象
@@ -177,8 +178,34 @@ abstract class GxrBaseActivity : AppCompatActivity, GxrBaseUi {
     get() = window.decorView
   
   final override fun getViewLifecycleOwner(): LifecycleOwner = this
-  
-  
+
+  // 是否已经创建了 ContentView
+  private var mHasContentViewChanged = false
+
+  // doOnContentViewChanged 添加的回调
+  private val mOnCreateContentViewAction = ArrayList<(rootView: View) -> Any?>()
+
+  final override fun doOnCreateContentView(action: (rootView: View) -> Any?) {
+    if (mHasContentViewChanged) {
+      if (action.invoke(rootView) != null) {
+        mOnCreateContentViewAction.add(action)
+      }
+    } else mOnCreateContentViewAction.add(action)
+  }
+
+  override fun onContentChanged() {
+    super.onContentChanged()
+    if (mHasContentViewChanged) throw IllegalStateException("不允许多次调用 setContentView")
+    mHasContentViewChanged = true
+    val iterator = mOnCreateContentViewAction.iterator()
+    while (iterator.hasNext()) {
+      if (iterator.next().invoke(rootView) == null) {
+        iterator.remove()
+      }
+    }
+  }
+
+  final override fun <T : View> Int.view(): BindView<T> = BindView(this, this@GxrBaseActivity)
   
   /**
    * 快速得到 intent 中的变量，直接使用反射拿了变量的名字

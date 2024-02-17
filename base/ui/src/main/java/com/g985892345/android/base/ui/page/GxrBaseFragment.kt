@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.*
 import com.g985892345.android.base.ui.utils.ArgumentHelper
 import com.g985892345.android.base.ui.utils.ArgumentHelperNullable
+import com.g985892345.android.utils.view.bind.BindView
 
 /**
  * 绝对基础的抽象
@@ -144,6 +145,17 @@ abstract class GxrBaseFragment : Fragment, GxrBaseUi {
   
   final override val rootView: View
     get() = requireView()
+
+  final override fun doOnCreateContentView(action: (rootView: View) -> Any?) {
+    viewLifecycleOwnerLiveData.observeUntil(this) {
+      if (it != null) {
+        // 直到返回 null 才停止
+        action.invoke(rootView) == null
+      } else false
+    }
+  }
+
+  final override fun <T : View> Int.view(): BindView<T> = BindView(this, this@GxrBaseFragment)
   
   val viewLifecycleScope: LifecycleCoroutineScope
     get() = viewLifecycleOwner.lifecycle.coroutineScope
