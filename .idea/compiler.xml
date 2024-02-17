@@ -2,11 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
-      <module name="AndroidWheel.app" target="17" />
-      <module name="AndroidWheel.build-logic.library.main" target="17" />
       <module name="AndroidWheel.build-logic.publish.main" target="17" />
-      <module name="build-logic.library" target="17" />
-      <module name="build-logic.library.test" target="17" />
       <module name="build-logic.publish" target="17" />
       <module name="build-logic.publish.test" target="17" />
     </bytecodeTargetLevel>

@@ -88,10 +88,10 @@ class BindView<V : View>(
   val getLifecycle: () -> Lifecycle,
 ) : ReadOnlyProperty<Any, V> {
 
-  constructor(@IdRes resId: Int, root: View) : this(
+  constructor(@IdRes resId: Int, root: () -> View) : this(
     resId,
-    { root.findViewById(it) },
-    { ViewTreeLifecycleOwner.get(root)!!.lifecycle }
+    { root.invoke().findViewById(it) },
+    { ViewTreeLifecycleOwner.get(root.invoke())!!.lifecycle }
   )
   
   constructor(@IdRes resId: Int, activity: ComponentActivity) : this(
@@ -126,7 +126,8 @@ class BindView<V : View>(
   private var mView: V? = null
   
   private val mInitializeList = mutableListOf<V.() -> Unit>()
-  
+
+  // 这里 thisRef 写成非空就不允许在局部变量中使用
   override fun getValue(thisRef: Any, property: KProperty<*>): V {
     if (mView == null) {
       val lifecycle: Lifecycle
@@ -201,3 +202,5 @@ class BindView<V : View>(
     }
   }
 }
+
+fun <T : View> Int.view(root: () -> View): BindView<T> = BindView(this, root)

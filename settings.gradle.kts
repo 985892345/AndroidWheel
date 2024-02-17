@@ -5,6 +5,8 @@ pluginManagement {
     mavenCentral()
     gradlePluginPortal()
     mavenLocal()
+    // mavenCentral 快照仓库
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     maven("https://jitpack.io")
   }
 }
@@ -15,6 +17,8 @@ dependencyResolutionManagement {
     mavenCentral()
     maven("https://jitpack.io")
     mavenLocal()
+    // mavenCentral 快照仓库
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     jcenter() // 部分依赖需要
   }
 }

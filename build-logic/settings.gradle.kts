@@ -2,8 +2,11 @@ pluginManagement {
   includeBuild(".")
   repositories {
     gradlePluginPortal()
+    mavenLocal()
     mavenCentral()
     google()
+    // mavenCentral 快照仓库
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     maven("https://maven.aliyun.com/repository/public")
     maven("https://maven.aliyun.com/repository/google")
   }
@@ -11,11 +14,13 @@ pluginManagement {
 
 dependencyResolutionManagement {
   repositories {
+    mavenLocal()
     mavenCentral()
     google()
+    // mavenCentral 快照仓库
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     maven("https://maven.aliyun.com/repository/public")
     maven("https://maven.aliyun.com/repository/google")
-    maven("https://jitpack.io")
   }
   // 开启 versionCatalogs 功能
   versionCatalogs {
@@ -28,4 +33,3 @@ dependencyResolutionManagement {
 rootProject.name = "build-logic"
 
 include("library")
-include("publish")

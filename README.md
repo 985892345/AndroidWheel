@@ -2,9 +2,9 @@
 
 Android 的各种扩展，提供依赖用于快速搭建项目
 
-大部分来之掌邮
-
-![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/io.github.985892345/extensions-android?server=https://s01.oss.sonatype.org&label=AndroidWheel)  
+大部分来自掌邮
+![Maven Central](https://img.shields.io/maven-central/v/io.github.985892345/base-ui?server=https://s01.oss.sonatype.org&label=release)
+![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/io.github.985892345/base-ui?server=https://s01.oss.sonatype.org&label=SNAPSHOT)
 
 ## 引入教程
 目前还处于测试阶段，未发布稳定包，请先设置 MavenCentral 快照仓库后进行依赖

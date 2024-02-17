@@ -20,6 +20,9 @@ val Int.color: Int
 val Int.string: String
   get() = appContext.getString(this)
 
+val Int.stringArray: Array<String>
+  get() = appContext.resources.getStringArray(this)
+
 val Int.drawable: Drawable
   get() = AppCompatResources.getDrawable(appContext, this)!!
 
