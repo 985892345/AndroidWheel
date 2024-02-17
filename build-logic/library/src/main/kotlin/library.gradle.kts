@@ -4,6 +4,7 @@ import org.gradle.kotlin.dsl.dependencies
 plugins {
   id("com.android.library")
   id("kotlin-android")
+  id("io.github.985892345.MavenPublisher")
 }
 
 android {
@@ -38,13 +39,3 @@ dependencies {
   implementation("androidx.appcompat:appcompat:1.6.1")
 }
 
-
-// 发布 maven 需要
-android {
-  publishing {
-    singleVariant("release") {
-      withJavadocJar()
-      withSourcesJar()
-    }
-  }
-}

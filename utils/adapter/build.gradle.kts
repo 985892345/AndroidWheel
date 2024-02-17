@@ -1,8 +1,7 @@
 plugins {
   id("library")
-  id("publish")
 }
-publish.artifactId = "utils-adapter"
+publisher.artifactId = "utils-adapter"
 android.namespace = "com.g985892345.android.utils.adapter"
 
 dependencies {

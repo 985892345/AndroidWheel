@@ -1,9 +1,7 @@
 plugins {
   id("library-jvm")
-  id("publish")
 }
-publish.artifactId = "jvm-rxjava"
-publish.publicationConfig = Publish.MavenPublicationConfig.Jvm
+publisher.artifactId = "jvm-rxjava"
 
 dependencies {
   api(project(":jvm:exception"))

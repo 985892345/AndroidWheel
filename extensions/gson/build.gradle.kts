@@ -1,8 +1,7 @@
 plugins {
   id("library")
-  id("publish")
 }
-publish.artifactId = "extensions-gson"
+publisher.artifactId = "extensions-gson"
 android.namespace = "com.g985892345.android.extensions.gson"
 
 dependencies {

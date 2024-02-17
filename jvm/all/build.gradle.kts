@@ -1,9 +1,7 @@
 plugins {
   id("library-jvm")
-  id("publish")
 }
-publish.artifactId = "jvm-all"
-publish.publicationConfig = Publish.MavenPublicationConfig.Jvm
+publisher.artifactId = "jvm-all"
 
 // 依赖 jvm 下的其他模块
 val thisProject = project

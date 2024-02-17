@@ -1,8 +1,7 @@
 plugins {
   id("library")
-  id("publish")
 }
-publish.artifactId = "utils-all"
+publisher.artifactId = "utils-all"
 android.namespace = "com.g985892345.android.utils.all"
 
 // 依赖 utils 下的其他模块

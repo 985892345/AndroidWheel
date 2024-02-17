@@ -1,8 +1,7 @@
 plugins {
   id("library")
-  id("publish")
 }
-publish.artifactId = "utils-context"
+publisher.artifactId = "utils-context"
 android.namespace = "com.g985892345.android.utils.context"
 
 dependencies {

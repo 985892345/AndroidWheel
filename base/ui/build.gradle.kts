@@ -1,8 +1,7 @@
 plugins {
   id("library")
-  id("publish")
 }
-publish.artifactId = "base-ui"
+publisher.artifactId = "base-ui"
 android.namespace = "com.g985892345.android.base.ui"
 
 dependencies {

@@ -13,9 +13,8 @@ generate_android_files "$module_name" "utils/$module_name"
 # 生成 build.gradle.kts, 这里单独生成, 没有使用 generate_build_gradle 函数
 echo -e "plugins {
   id(\"library\")
-  id(\"publish\")
 }
-publish.artifactId = \"utils-$module_name\"
+publisher.artifactId = \"utils-$module_name\"
 android.namespace = \"com.g985892345.android.utils.$module_name\"
 " > "$module_name/build.gradle.kts"
 

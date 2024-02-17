@@ -1,8 +1,7 @@
 plugins {
   id("library")
-  id("publish")
 }
-publish.artifactId = "extensions-all"
+publisher.artifactId = "extensions-all"
 android.namespace = "com.g985892345.android.extensions.all"
 
 // 依赖 extensions 下的其他模块

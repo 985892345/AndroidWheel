@@ -1,8 +1,7 @@
 plugins {
   id("library")
-  id("publish")
 }
-publish.artifactId = "extensions-rxjava"
+publisher.artifactId = "extensions-rxjava"
 android.namespace = "com.g985892345.android.extensions.rxjava"
 
 dependencies {

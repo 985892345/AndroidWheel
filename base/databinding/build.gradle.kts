@@ -1,8 +1,7 @@
 plugins {
   id("library")
-  id("publish")
 }
-publish.artifactId = "base-databinding"
+publisher.artifactId = "base-databinding"
 android.namespace = "com.g985892345.android.base.databinding"
 
 dependencies {

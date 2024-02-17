@@ -13,10 +13,8 @@ generate_jvm_files "$module_name" "jvm/$module_name"
 # 生成 build.gradle.kts, 这里单独生成, 没有使用 generate_build_gradle 函数
 echo -e "plugins {
   id(\"library-jvm\")
-  id(\"publish\")
 }
-publish.artifactId = \"jvm-$module_name\"
-publish.publicationConfig = Publish.MavenPublicationConfig.Jvm
+publisher.artifactId = \"jvm-$module_name\"
 " > "$module_name/build.gradle.kts"
 
 # 在 settings.gradle.kts 的 // jvm 下面插入 include
